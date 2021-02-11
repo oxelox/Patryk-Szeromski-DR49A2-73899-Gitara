@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sklep gitarowy</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Gra gitara", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.Action("Index", "Produkty", new {kategoriaId = 1})">Gitary elektryczne</a></li>
+                    <li><a href="@Url.Action("Index", "Produkty", new {kategoriaId = 2})">Gitary akustyczne</a></li>
+                    <li><a href="@Url.Action("Index", "Produkty", new {kategoriaId = 3})">Gitary klasyczne</a></li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            @RenderBody()
+        </div>
+        <div class="row">
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Patryk Szeromski DR49A2 73899</p>
+                <p>Konto testowe <strong>Login:</strong> test <strong>Hasło:</strong> test1</p>
+            </footer>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery-addons")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

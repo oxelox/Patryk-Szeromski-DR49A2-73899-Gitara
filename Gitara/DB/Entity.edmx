@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kategoria">
+          <Key>
+            <PropertyRef Name="KategoriaId" />
+          </Key>
+          <Property Name="KategoriaId" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="KlientId" />
+          </Key>
+          <Property Name="KlientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nazwisko" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Haslo" Type="varchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Towar">
+          <Key>
+            <PropertyRef Name="TowarId" />
+          </Key>
+          <Property Name="TowarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producent" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Cena" Type="money" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Opis" Type="varchar(max)" Nullable="false" />
+          <Property Name="KategoriaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transakcje">
+          <Key>
+            <PropertyRef Name="TransakcjaId" />
+          </Key>
+          <Property Name="TransakcjaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KlientId" Type="int" Nullable="false" />
+          <Property Name="TowarId" Type="int" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Kategoria" EntityType="Self.Kategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Towar" EntityType="Self.Towar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transakcje" EntityType="Self.Transakcje" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Klient" EntityType="DatabaseModel.Klient" />
+          <EntitySet Name="Kategoria" EntityType="DatabaseModel.Kategoria" />
+          <EntitySet Name="Towar" EntityType="DatabaseModel.Towar" />
+          <EntitySet Name="Transakcje" EntityType="DatabaseModel.Transakcje" />
+        </EntityContainer>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="KlientId" />
+          </Key>
+          <Property Name="KlientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Nazwisko" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Haslo" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Kategoria">
+          <Key>
+            <PropertyRef Name="KategoriaId" />
+          </Key>
+          <Property Name="KategoriaId" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Towar">
+          <Key>
+            <PropertyRef Name="TowarId" />
+          </Key>
+          <Property Name="TowarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producent" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cena" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="KategoriaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transakcje">
+          <Key>
+            <PropertyRef Name="TransakcjaId" />
+          </Key>
+          <Property Name="TransakcjaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KlientId" Type="Int32" Nullable="false" />
+          <Property Name="TowarId" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Klient">
+            <EntityTypeMapping TypeName="DatabaseModel.Klient">
+              <MappingFragment StoreEntitySet="Klient">
+                <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="KlientId" ColumnName="KlientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoria">
+            <EntityTypeMapping TypeName="DatabaseModel.Kategoria">
+              <MappingFragment StoreEntitySet="Kategoria">
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="KategoriaId" ColumnName="KategoriaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Towar">
+            <EntityTypeMapping TypeName="DatabaseModel.Towar">
+              <MappingFragment StoreEntitySet="Towar">
+                <ScalarProperty Name="KategoriaId" ColumnName="KategoriaId" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Producent" ColumnName="Producent" />
+                <ScalarProperty Name="TowarId" ColumnName="TowarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transakcje">
+            <EntityTypeMapping TypeName="DatabaseModel.Transakcje">
+              <MappingFragment StoreEntitySet="Transakcje">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="TowarId" ColumnName="TowarId" />
+                <ScalarProperty Name="KlientId" ColumnName="KlientId" />
+                <ScalarProperty Name="TransakcjaId" ColumnName="TransakcjaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

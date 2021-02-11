@@ -1,0 +1,47 @@
+﻿@model Gitara.Models.ZamowienieHistoriaViewModel
+
+@{
+    ViewBag.Title = "Historia zamówień";
+}
+
+
+<div class="col-xs-12">
+    <h3>Historia zamówień</h3>
+    <hr/>
+</div>
+<div id="lista" class="col-xs-12">
+    @if (Model.Zamowienia.Any())
+    {
+        foreach (var m in Model.Zamowienia)
+        {
+            <div class="panel panel-default panel-info">
+                <div class="panel-body">
+                    <div class="col-xs-4">
+                        <h4>Zamówienie @m.Transakcja.TransakcjaId</h4>
+                        <h4><small>@m.Transakcja.Data.ToString("yyyy-MM-dd hh:mm")</small></h4>
+                    </div>
+                    <div class="col-xs-4">
+                        <h3>
+                            @m.Towar.Producent<small>@m.Towar.Model</small>
+                        </h3>
+                        &nbsp;
+                    </div>
+
+                    <div class="col-xs-4">
+                        <h5>Cena</h5>
+                        <h4>@m.Towar.Cena.ToString("c")</h4>
+                    </div>
+                    
+                    <div class="col-xs-12">
+                        <h5>Opis</h5>
+                        <h4>@m.Towar.Opis</h4>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3 class="text-center">Nie posiadasz żadnych zamówień</h3>
+    }
+</div>

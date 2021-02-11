@@ -1,0 +1,72 @@
+﻿@model Gitara.DB.Towar
+
+@{
+    ViewBag.Title = "Zamów " + Model.Producent + " " + Model.Model;
+}
+
+<div class="col-md-12">
+    <h2 class="text-center">Potwierdź zamówienie</h2>
+
+    <hr/>
+    @if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+    {
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            @Html.ValidationSummary(true)
+        </div>
+    }
+
+    <div class="col-xs-6 text-right">
+        <b>Producent</b>
+    </div>
+
+    <div class="col-xs-6">
+        @Html.DisplayFor(model => model.Producent)
+    </div>
+    <div class="col-xs-6 text-right">
+        <b>Model</b>
+    </div>
+
+    <div class="col-xs-6">
+        @Html.DisplayFor(model => model.Model)
+    </div>
+
+    <div class="col-xs-6 text-right">
+        <b>Opis</b>
+    </div>
+
+    <div class="col-xs-6">
+        @Html.DisplayFor(model => model.Opis)
+    </div>
+
+    <div class="col-xs-6 text-right">
+        <b>Cena</b>
+    </div>
+
+    <div class="col-xs-6">
+        @Model.Cena.ToString("c")
+    </div>
+
+
+    <p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.TowarId)
+
+            <dl class="dl-horizontal">
+                <div class="col-xs-6 text-right">
+                    @Html.ActionLink("Anuluj", "Index", "Home", null, new {@class = "btn btn-warning"})
+                </div>
+
+                <div class="col-xs-6">
+                    <input type="submit" value="Potwierdź" class="btn btn-success"/>
+                </div>
+
+
+            </dl>
+        }
+    </p>
+
+</div>

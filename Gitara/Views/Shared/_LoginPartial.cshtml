@@ -1,0 +1,33 @@
+﻿@using Gitara.Helpers
+@using Gitara.Repo
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" sytle="width:200px">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Witaj  @(String.IsNullOrWhiteSpace(Session["Klient"]?.ToString()) ? (new AccountRepo()).AktualizujNazweWSesji(User.Identity.ID()) : Session["Klient"]) !<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        @*@Html.ActionLink(" Moje ogłoszenia", "MojeOgloszenia", "Ogloszenie",null,new {@style="width:300px" })
+					<span class="glyphicon glyphicon-list-alt"></span>*@
+                        <a href="@Url.Action("Historia", "Produkty")">
+                            <span class="glyphicon glyphicon-th-list"></span>
+                            &nbsp; Moje zamówienia
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Rejestracja", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Logowanie", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
